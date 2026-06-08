@@ -1,2 +1,2 @@
 # FlexiRaman
-python scripts form FlexiRaman project
+python scripts from FlexiRaman project

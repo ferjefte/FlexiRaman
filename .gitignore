@@ -1,0 +1,51 @@
+# Ignore everything by default
+*
+
+# But don't ignore .gitignore itself
+!.gitignore
+
+# Track Python scripts folder
+!python_scripts/
+!python_scripts/**/*.py
+
+# Allow programming files (include these)
+!*.py      # Python files
+!*.js      # JavaScript files
+!*.html    # HTML files
+!*.css     # CSS files
+!*.java    # Java files
+!*.cpp     # C++ files
+!*.c       # C files
+!*.cs      # C# files
+!*.go      # Go files
+!*.rs      # Rust files
+!*.php     # PHP files
+!*.rb      # Ruby files
+!*.swift   # Swift files
+!*.kt      # Kotlin files
+!*.ts      # TypeScript files
+!*.jsx     # React JSX
+!*.tsx     # React TypeScript
+!*.vue     # Vue.js files
+!*.sql     # SQL files
+!*.R       # R files
+!*.m       # MATLAB/Objective-C
+!*.scala   # Scala files
+
+# Allow configuration files
+!*.json    # JSON config files
+!*.yaml    # YAML config files
+!*.yml     # YML config files
+!*.toml    # TOML config files
+!*.xml     # XML files
+!*.ini     # INI config files
+!*.conf    # Config files
+
+# Allow documentation (optional)
+!*.md      # Markdown files
+!*.txt     # Text files
+
+# Allow script files
+!*.sh      # Shell scripts
+!*.bat     # Batch files
+!*.ps1     # PowerShell scripts

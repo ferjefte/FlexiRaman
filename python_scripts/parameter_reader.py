@@ -25,7 +25,7 @@ def parameter_reader(directory):
         vals = {}
         for l in lines:
                 a=l.split('\t')
-                print(a)
+                # print(a)
                 vals[a[0]]=a[1]
     
     return vals

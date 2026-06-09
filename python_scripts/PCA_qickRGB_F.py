@@ -25,8 +25,11 @@ from matplotlib.colors import LinearSegmentedColormap, ListedColormap
 ########## change parameters here #################################################################
 # FOLDER NAMES AND DIRECTORIES
 
-project_directory = r'D:\Projekte\Flexiraman\Fernando'
-data_directory = r'D:\Projekte\Flexiraman\Fernando\data'
+script_directory = os.path.dirname(os.path.abspath(__file__))
+
+project_directory = os.path.dirname(script_directory)
+data_directory = os.path.join(project_directory, "data")
+
 
 # date = '20250717'
 # date = '20250523'

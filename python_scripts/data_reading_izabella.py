@@ -8,8 +8,10 @@ Created on Thu May  7 15:13:38 2026
 import numpy as np
 import os
 
-project_directory = r'D:\Projekte\Flexiraman\Fernando'
-data_directory = r'D:\Projekte\Flexiraman\Fernando\data'
+script_directory = os.path.dirname(os.path.abspath(__file__))
+
+project_directory = os.path.dirname(script_directory)
+data_directory = os.path.join(project_directory, "data")
 
 date = '20260505'
 

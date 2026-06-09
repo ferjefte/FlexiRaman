@@ -46,10 +46,10 @@ from loadIntImg_cluster import loadIzaImg
 
 ########## change parameters here #################################################################
 
-project_directory = r'D:\Projekte\Flexiraman\Fernando'
-Pfad_data = r'D:\Projekte\Flexiraman\Fernando\data'
-# project_directory =  r'/work/na67jir/myproject'
-# Pfad_data = r'/work/na67jir/myproject/data'
+script_directory = os.path.dirname(os.path.abspath(__file__))
+
+project_directory = os.path.dirname(script_directory)
+data_directory = os.path.join(project_directory, "data")
 
 # date = '20260513'
 date = '20260505'

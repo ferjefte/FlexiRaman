@@ -21,7 +21,10 @@ from calibration_raw_img_process import img_load_avg
 
 
 # FILE NAMES AND DIRECTORIES
-project_directory = r'D:\Projekte\Flexiraman\Fernando'
+
+script_directory = os.path.dirname(os.path.abspath(__file__))
+
+project_directory = os.path.dirname(script_directory)
 
 date = '20240906'
 # date = '20250514'

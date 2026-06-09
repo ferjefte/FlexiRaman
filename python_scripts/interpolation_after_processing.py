@@ -16,8 +16,12 @@ from SNIP_algorithm import  baseline_correction_images
 import os 
 from parameter_reader import parameter_reader
 
-project_directory = r'D:\Projekte\Flexiraman\Fernando'
-data_directory = r'D:\Projekte\Flexiraman\Fernando\data'
+script_directory = os.path.dirname(os.path.abspath(__file__))
+
+project_directory = os.path.dirname(script_directory)
+data_directory = os.path.join(project_directory, "data")
+
+
 
 date = '20250516'
 # date = '20250514'

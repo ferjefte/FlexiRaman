@@ -17,13 +17,14 @@ import numpy as np
 import tifffile as tf
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
+from pathlib import Path
 
 
 #%%
 # CORRESPONDING FOLDER AND IMAGE NAMES
 
-project_directory = r'D:\Projekte\Flexiraman\Fernando'
-data_directory = r'D:\Projekte\Flexiraman\Fernando\data'
+project_directory = Path(__file__).parent.parent
+data_directory = os.path.join(project_directory, "data")
 
 # date = '20250408'
 # date = '20250717'

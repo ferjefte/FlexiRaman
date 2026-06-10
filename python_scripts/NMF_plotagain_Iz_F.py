@@ -11,13 +11,15 @@ Necessary information is read from "NMFinfo_ .txt"
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+from pathlib import Path
 
 ########## change parameters here #################################################################
 
 # FOLDER NAMES AND DIRECTORIES
 
-project_directory = r'D:\Projekte\Flexiraman\Fernando'
-data_directory = r'D:\Projekte\Flexiraman\Fernando\data'
+project_directory = Path(__file__).parent.parent
+data_directory = os.path.join(project_directory, "data")
+
 
 
 # date = '20260107'

@@ -23,6 +23,7 @@ import matplotlib.pyplot as plt
 import os
 import tifffile as tf
 import cv2
+from pathlib import Path
 
 #%%
 # GAUSS FUNCTION DEFINITION 
@@ -40,8 +41,9 @@ def gauss(sigma, mu, amp, x):
 #%%
 # DIRECTORIES AND FOLDERS
 
-project_directory = r'D:\Projekte\Flexiraman\Fernando'
-data_directory = r'D:\Projekte\Flexiraman\Fernando\data'
+project_directory = Path(__file__).parent.parent
+data_directory = os.path.join(project_directory, "data")
+
 
 # date = '20250408'
 # date = '20250717'

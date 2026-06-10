@@ -65,10 +65,8 @@ folder_name =  date+'_'+sample+'_ROI'+ROI+'_test'+test
 working_directory = os.path.join(project_directory, folder_name)
 
 # DARK BACKGROUND AVERAGE FILE PATH
-# dark_folder_name ='20250520_dark'
-# dark_directory = os.path.join(project_directory, dark_folder_name)
-dark_folder_name = 'dark'
-dark_directory = os.path.join(working_directory, dark_folder_name)
+
+dark_directory = os.path.join(working_directory, 'dark')
 
 
 ### RETRIEVE VARIABLE FROM TEXT FILES ###################

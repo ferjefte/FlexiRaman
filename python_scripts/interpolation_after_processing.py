@@ -15,10 +15,10 @@ from hyperspec_calibration_optimization_visual_gpt_f import (interpolation_pytho
 from SNIP_algorithm import  baseline_correction_images
 import os 
 from parameter_reader import parameter_reader
+from pathlib import Path
 
-script_directory = os.path.dirname(os.path.abspath(__file__))
 
-project_directory = os.path.dirname(script_directory)
+project_directory = Path(__file__).parent.parent
 data_directory = os.path.join(project_directory, "data")
 
 

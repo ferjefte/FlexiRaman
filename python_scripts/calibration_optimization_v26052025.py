@@ -21,14 +21,14 @@ from calib_n_ord_terms_optimization import hyperspec_calibration
 from calibration_interpolation import flexram_interp_calib
 import os 
 from parameter_reader import parameter_reader, parameter_reader_slit
+from pathlib import Path
 
 # FILE NAMES AND DIRECTORIES
 
-script_directory = os.path.dirname(os.path.abspath(__file__))
 
-project_directory = os.path.dirname(script_directory)
+project_directory = Path(__file__).parent.parent
 data_directory = os.path.join(project_directory, "data")
-calib_param_directory = os.path.join(project_directory, "20260106_Neon_lamp_test01","calibration_data" )
+calib_param_directory = os.path.join(project_directory, "20260106_Neon_lamp_test01", "calibration_data" )
 
 
 

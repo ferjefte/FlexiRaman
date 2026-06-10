@@ -87,27 +87,20 @@ m = int(gen_param_dic['m'])
 slit_dim_range = [float(gen_param_dic['slit_left']), float(gen_param_dic['slit_right'])]
 wavelen_range = [int(gen_param_dic['wavelen_left']), int(gen_param_dic['wavelen_right'])]
 
-# # B5 slit mask adjustments
-# yi0_adj = float(slit_adj_dic['yi0'])
-# rot_adj = float(slit_adj_dic['rot'])
-# xi0_adj = float(slit_adj_dic['xi0'])
 
 yi0_adj = float(slit_adj_dic[slit][0])
 rot_adj = float(slit_adj_dic[slit][1])
 xi0_adj = float(slit_adj_dic[slit][2])
 
 # CALIBRATION PARAMETERS FILE PATH
-calib_param_directory = os.path.join(project_directory, '20240906_Neon_lamp_test01\\calibration_data') # old slit mask C4 (FR2022_4)
-# calib_param_directory = os.path.join(project_directory, '20260105_Neon_lamp_test01\\calibration_data') # new slit mask B4 (FR2022_4)
+# calib_param_directory = os.path.join(project_directory, '20240906_Neon_lamp_test01', 'calibration_data') # old slit mask C4 (FR2022_4)
+calib_param_directory = os.path.join(project_directory, '20260105_Neon_lamp_test01', 'calibration_data') # new slit mask B4 (FR2022_4)
 calib_param_file_name = f'optimized_parameters_{order}_units.npy'
 calib_param_file_path = os.path.join(calib_param_directory, calib_param_file_name)
 
-# GAUSS CORRECTION MATRIX PATH
-gauss_correction_name = 'vertical_gauss_correction_matrix_20250408.npy'
-
 
 #%%
-def flexram_interpolation_gpt(working_directory, data_directory, dark_directory, calib_param_file_path, folder_name, gauss_correction_name,
+def flexram_interpolation_gpt(working_directory, data_directory, dark_directory, calib_param_file_path, folder_name,
                               order, umethod, 
                               yi0_adj, rot_adj, xi0_adj, 
                               file_ext='*.tif',  n=2048, m=2048, 
@@ -296,7 +289,7 @@ def flexram_interpolation_gpt(working_directory, data_directory, dark_directory,
 # FUNCTION RUNNING 
 
 if __name__ == '__main__':
-    flexram_interpolation_gpt(working_directory, data_directory, dark_directory, calib_param_file_path, folder_name, gauss_correction_name,
+    flexram_interpolation_gpt(working_directory, data_directory, dark_directory, calib_param_file_path, folder_name,
                               order, umethod, 
                               yi0_adj, rot_adj, xi0_adj,
                               file_ext, 

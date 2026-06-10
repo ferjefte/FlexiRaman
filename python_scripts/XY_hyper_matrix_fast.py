@@ -16,6 +16,7 @@ import gc
 import shutil
 from parameter_reader import parameter_reader
 from tqdm import tqdm
+from pathlib import Path
 
 #%%
 # FOLDER CONTENTS ERASER 
@@ -107,9 +108,10 @@ def process_images(file_paths, output_dir, trash_dir, iterator, n, m):
 
 # DIRECTORIES AND PATHS
 
-project_directory = r'D:\Projekte\Flexiraman\Fernando'
-data_directory = r'D:\Projekte\Flexiraman\Fernando\data'
-calib_param_directory = os.path.join(project_directory, '20240906_Neon_lamp_test01\\calibration_data')
+project_directory = Path(__file__).parent.parent
+data_directory = os.path.join(project_directory, "data")
+
+calib_param_directory = os.path.join(project_directory, '20240906_Neon_lamp_test01', 'calibration_data')
 
 # date = '20250516'
 date = '20250717'

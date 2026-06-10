@@ -18,15 +18,15 @@ from mask import mask_maker
 from img_dark_processor import img_dark_pross
 import tifffile as tf
 from calibration_raw_img_process import img_load_avg
+from pathlib import Path
 
 
 # FILE NAMES AND DIRECTORIES
 
-script_directory = os.path.dirname(os.path.abspath(__file__))
+project_directory = Path(__file__).parent.parent
 
-project_directory = os.path.dirname(script_directory)
 
-date = '20240906'
+# date = '20240906'
 # date = '20250514'
 # date = '20251029'
 # date = '20260105'

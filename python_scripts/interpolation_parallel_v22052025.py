@@ -14,6 +14,7 @@ import tifffile as tiff
 import time
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from parameter_reader import parameter_reader, parameter_reader_slit
+from pathlib import Path
 
 # CONFIGURE LOGGING
 
@@ -36,9 +37,7 @@ logger.addHandler(console_handler)
 
 # FOLDER NAMES AND DIRECTORIES
 
-script_directory = os.path.dirname(os.path.abspath(__file__))
-
-project_directory = os.path.dirname(script_directory)
+project_directory = Path(__file__).parent.parent
 data_directory = os.path.join(project_directory, "data")
 
 

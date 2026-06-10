@@ -45,11 +45,14 @@ import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA # install scikit-learn in your conda environment
 from parameter_reader import parameter_reader
 from loadIntImg_cluster import loadIntImg
+from pathlib import Path
 
 ########## change parameters here #################################################################
 
-project_directory = r'D:\Projekte\Flexiraman\Fernando'
-Pfad_data = r'D:\Projekte\Flexiraman\Fernando\data'
+project_directory = Path(__file__).parent.parent
+data_directory = os.path.join(project_directory, "data")
+
+
 
 
 # date = '20250717'
@@ -88,7 +91,7 @@ ROIxMax = 2047
 ########## read undistortion_info.txt #######################################################
 undistortion_info = {}
 
-undistortion_info = parameter_reader(Pfad_data +"/parameters_interpolation.txt")
+undistortion_info = parameter_reader(data_directory +"/parameters_interpolation.txt")
 # print(undistortion_info)
 ui_LaserWL = float(undistortion_info["LaserWL"])
 ui_ScaleLow = float(undistortion_info["wavelen_left"])

@@ -45,11 +45,13 @@ import datetime
 import matplotlib.pyplot as plt
 from sklearn.decomposition import NMF # install scikit-learn in your conda environment
 from parameter_reader import parameter_reader
+from pathlib import Path
 
 ########## change parameters here #################################################################
 
-project_directory =  r"D:\Projekte\Flexiraman\Fernando"
-Pfad_data = r'D:\Projekte\Flexiraman\Fernando\data'
+project_directory = Path(__file__).parent.parent
+data_directory = os.path.join(project_directory, "data")
+
 
 # date = '20250507'
 date = '20260518'
@@ -63,7 +65,7 @@ test = '01'
 folder_name = date+"_"+sample+"_ROI"+roi+"_test"+test
 
 Pfad_interp = os.path.join(project_directory, folder_name)
-Pfad_data = r"D:\Projekte\Flexiraman\Fernando\data"
+data_directory = r"D:\Projekte\Flexiraman\Fernando\data"
 imagetype = "SpXY" # select wether the image contains "XYSp" Data (after reslice) or "SpXY" (after undistortion without reslice) Data
 n_comp = 5; # Number of NMF components
 miter = 10; # Max Number of total NMF iterations
@@ -82,12 +84,12 @@ undistortion_info = {}
 
 # Die Datei öffnen und zeilenweise lesen
 
-# with open(Pfad_data +"\\parameters_interpolation.txt", "r") as file:
+# with open(data_directory +"\\parameters_interpolation.txt", "r") as file:
 #     for line in file:
 #         key, value = line.strip().split("\t") # Zeile in Key und Value aufteilen
 #         undistortion_info[key] = value # Key-Value-Paar im Dictionary speichern
 
-undistortion_info = parameter_reader(Pfad_data +"\\parameters_interpolation.txt")
+undistortion_info = parameter_reader(data_directory +"\\parameters_interpolation.txt")
 # print(undistortion_info)
 ui_LaserWL = float(undistortion_info["LaserWL"])
 ui_ScaleLow = float(undistortion_info["wavelen_left"])

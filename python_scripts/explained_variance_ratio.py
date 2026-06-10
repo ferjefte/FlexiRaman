@@ -14,8 +14,7 @@ from pathlib import Path
 
 project_directory = Path(__file__).parent.parent
 data_directory = os.path.join(project_directory, "data")
-# project_directory = r'D:\Projekte\Flexiraman\Fernando'
-# data_directory = r'D:\Projekte\Flexiraman\Fernando\data'
+
 
 # date = '20260107'
 # date = '20260505'

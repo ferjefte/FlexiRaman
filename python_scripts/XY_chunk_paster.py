@@ -13,15 +13,15 @@ import time
 from tqdm import tqdm
 import tifffile
 from parameter_reader import parameter_reader
-
+from pathlib import Path
 
 #%%
 
 # DIRECTORIES AND PATHS
+project_directory = Path(__file__).parent.parent
+data_directory = os.path.join(project_directory, "data")
 
-project_directory = r'D:\Projekte\Flexiraman\Fernando'
-data_directory = r'D:\Projekte\Flexiraman\Fernando\data'
-calib_param_directory = os.path.join(project_directory, '20240906_Neon_lamp_test01\\calibration_data')
+calib_param_directory = os.path.join(project_directory, '20240906_Neon_lamp_test01', 'calibration_data')
 gauss_correction_name = 'vertical_gauss_correction_matrix_20250408.npy'
 
 # date = '20250516'

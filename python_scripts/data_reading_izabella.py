@@ -7,10 +7,10 @@ Created on Thu May  7 15:13:38 2026
 
 import numpy as np
 import os
+from pathlib import Path
 
-script_directory = os.path.dirname(os.path.abspath(__file__))
-
-project_directory = os.path.dirname(script_directory)
+# FOLDER NAMES AND DIRECTORIES
+project_directory = Path(__file__).parent.parent
 data_directory = os.path.join(project_directory, "data")
 
 date = '20260505'

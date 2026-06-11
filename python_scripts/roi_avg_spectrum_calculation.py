@@ -28,11 +28,12 @@ import numpy as np
 import tifffile as tf
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
+from pathlib import Path
 
 # FOLDER NAMES AND DIRECTORIES
+project_directory = Path(__file__).parent.parent
+data_directory = os.path.join(project_directory, "data")
 
-project_directory = r'D:\Projekte\Flexiraman\Fernando'
-data_directory = r'D:\Projekte\Flexiraman\Fernando\data'
 
 # date = '20250717'
 date = '20250523'

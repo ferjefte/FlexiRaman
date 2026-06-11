@@ -43,12 +43,11 @@ import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA # install scikit-learn in your conda environment
 from parameter_reader import parameter_reader
 from loadIntImg_cluster import loadIzaImg
+from pathlib import Path
 
-########## change parameters here #################################################################
 
-script_directory = os.path.dirname(os.path.abspath(__file__))
 
-project_directory = os.path.dirname(script_directory)
+project_directory = Path(__file__).parent.parent
 data_directory = os.path.join(project_directory, "data")
 
 # date = '20260513'

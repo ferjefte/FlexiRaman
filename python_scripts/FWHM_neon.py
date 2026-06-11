@@ -8,12 +8,13 @@ Created on Mon Oct 27 15:25:13 2025
 import numpy as np
 import os
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 #%%
-# FOLDER NAMES AND DIRECTORIES
 
-project_directory = r'D:\Projekte\Flexiraman\Fernando'
-data_directory = r'D:\Projekte\Flexiraman\Fernando\data'
+# FOLDER NAMES AND DIRECTORIES
+project_directory = Path(__file__).parent.parent
+data_directory = os.path.join(project_directory, "data")
 
 date = '20251029'
 date = '20240906'

@@ -26,11 +26,11 @@ import tifffile as tf
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from pybaselines import Baseline
+from pathlib import Path
 
 # FOLDER NAMES AND DIRECTORIES
-
-project_directory = r'D:\Projekte\Flexiraman\Fernando'
-data_directory = r'D:\Projekte\Flexiraman\Fernando\data'
+project_directory = Path(__file__).parent.parent
+data_directory = os.path.join(project_directory, "data")
 
 date = '20250717'
 # date = '20250523'

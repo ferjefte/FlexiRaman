@@ -20,14 +20,14 @@ import tifffile as tf # https://pypi.org/project/tifffile/  # open Terminal of e
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap, ListedColormap
+from pathlib import Path
 
 ########## change parameters here #################################################################
 # FOLDER NAMES AND DIRECTORIES
 
-script_directory = os.path.dirname(os.path.abspath(__file__))
-
-project_directory = os.path.dirname(script_directory)
+project_directory = Path(__file__).parent.parent
 data_directory = os.path.join(project_directory, "data")
+
 
 
 # date = '20250717'

@@ -49,15 +49,17 @@ data_directory = os.path.join(project_directory, "data")
 # date = '20250717'
 # date = '20250523'
 # date = '20250516'
-date = '20260107'
+# date = '20260107'
+date = '20260522'
 
-sample = 'PS3_3'  
+# sample = 'PS3_3'  
 # sample = 'Si_F'
-# sample = 'Pig01_C'
+sample = 'Pig01_C'
 
 # ROI = '02'
-ROI = '01'
+# ROI = '01'
 # ROI = '03'
+ROI = '04'
 
 test = '01'
 
@@ -70,8 +72,9 @@ test = '01'
 # subfolder = r"2026-01-13_12-00-38_c3" # date = '20260107' three 
 # subfolder = r"2026-01-13_11-12-08_c5" # date = '20260107' five 
 # subfolder = r"2026-01-15_18-52-56_c7" # date = '20260107' seven NMF
-subfolder = r"2026-04-27_14-59-07_c7" # date = '20260107' seven # corrected for horizontal shift 
+# subfolder = r"2026-04-27_14-59-07_c7" # date = '20260107' seven # corrected for horizontal shift 
 # subfolder = r"2026-01-14_18-48-46_c7" # date = '20260107' seven PCA
+subfolder = r"2026-05-26_16-55-12_c7" # date = '20260522'
 
 # PCA
 # jj = 184
@@ -83,8 +86,10 @@ i_imgs = 7
 
 for i in range(i_imgs):
     
+    # i=0
     # NMF
-    jj = 169 # date = '20260107' seven 
+    # jj = 169 # date = '20260107' seven
+    jj = 199 # date = '20260522' seven
     ii = i
     
     case_ = 'NMF'

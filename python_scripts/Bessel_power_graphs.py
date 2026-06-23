@@ -30,10 +30,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 from scipy.special import j0, j1
+from pathlib import Path
 
 # Define an array of Z
 z = np.linspace(0, 200, 100, endpoint=True) # [mm]
-z_max = 9.1
+z_max = 9.1 # where the max intensity happens
 # z_max = 1
 # Define constants
 k = 11814.04185 # [1/mm]
@@ -63,6 +64,11 @@ for i in range(len(alphas_0)):
     ax.set_xlabel('z [mm]')
     ax.set_ylabel('Intensity')
     ax.legend()
+    
+# saving plot
+project_folder = Path(__file__).parent.parent
+plot_z_path = os.path.join(project_folder, "data_presentation", "Intensity_z.png")
+plt.savefig(plot_z_path, format="png", dpi=300)
     
 #%%
 
@@ -94,19 +100,26 @@ def intensity_ro(z, k, alpha_0, omega_0, I_0, ro):
 
 # Plotting
 
-fig, ax = plt.subplots(1,1)
+zs = [z_max, 23.26, 46.6, 94]
 
-for j in range(len(alphas_0)):
-    I_ro_arr = []
-    for i in ro:
-        I_ro = intensity_ro(z_max, k, alphas_0[j], omega_0, I_0, i)
-        I_ro_arr.append(I_ro)
-    ax.plot(ro, I_ro_arr, '--o', label=label_alphas[j] )
+for l in zs:
+    fig, ax = plt.subplots(1,1)
     
-ax.set_xlabel('ro [mm]')
-ax.set_ylabel('Intensity')
-ax.legend()
-
+    
+    for j in range(len(alphas_0)):
+        I_ro_arr = []
+        for i in ro:
+            I_ro = intensity_ro(l, k, alphas_0[j], omega_0, I_0, i)
+            I_ro_arr.append(I_ro)
+        ax.plot(ro, I_ro_arr, '--o', label=label_alphas[j] )
+        
+    ax.set_xlabel('ro [mm]')
+    ax.set_ylabel('Intensity')
+    ax.set_title(f'Intensity along ro for z = {l} mm')
+    ax.legend()
+    
+    plot_ro_path = os.path.join(project_folder, "data_presentation", f"Intensity_ro_z_{l}.png")
+    plt.savefig(plot_ro_path, format="png", dpi=300)
         
 # fig, ax = plt.subplots(1,1)
 # arg = np.linspace(0,10, 50)

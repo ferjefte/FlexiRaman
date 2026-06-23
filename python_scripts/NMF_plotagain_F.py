@@ -23,22 +23,22 @@ data_directory = os.path.join(project_directory, "data")
 # date = '20250717'
 # date = '20250523'
 # date = '20250516'
-date = '20260107'
+# date = '20260107'
 # date = '20260519'
 # date = '20260520'
-# date = '20260522'
+date = '20260522'
 
-sample = 'PS3_3'
+# sample = 'PS3_3'
 # sample = 'CSilicon'
 # sample = 'Si_F'
 # sample = 'Pig_C'
-# sample = 'Pig01_C'
+sample = 'Pig01_C'
 # sample = 'Volt'
 
-ROI = '01'
+# ROI = '01'
 # ROI = '02'
 # ROI = '03'
-# ROI = '04'
+ROI = '04'
 
 test = '01'
 
@@ -49,10 +49,10 @@ test = '01'
 # subfolder = r"2025-08-12_13-25-28_c5" # date = '20250717' five
 # subfolder = r"2026-01-14_16-32-05_c7" # date = '20250717' seven
 # subfolder = r"2026-01-09_13-31-32_c5" # date = '20260107' five
-subfolder = r"2026-04-27_14-59-07_c7" # date = '20260107' seven
+# subfolder = r"2026-04-27_14-59-07_c7" # date = '20260107' seven
 # subfolder = r"2026-05-20_13-29-04_c7" # date = '20260107' seven
 # subfolder = r"2026-05-22_13-57-34_c7" # date = '20260520' seven
-# subfolder = r"2026-05-26_16-55-12_c7" # date = '20260522' seven
+subfolder = r"2026-05-26_16-55-12_c7" # date = '20260522' seven
 
 
 
@@ -62,9 +62,9 @@ working_directory = os.path.join(project_directory, folder_name)
 
 Pfad = working_directory
 
-# jj = 199 # date = '20250717'
+jj = 199 # date = '20250717'
 # jj= 184 # of 5 comp on 20250516
-jj = 169 # seven comp. 
+# jj = 169 # seven comp. 
 # jj = 88 # date = '20260107'
 # jj = 159 # date = '20260107' seven comp.
 PfadNMF = Pfad +"\\NMF"
@@ -100,18 +100,32 @@ scale_cm1 = scale_cm1=10000000/ui_LaserWL-10000000/scale
 
 HH=np.load(Bildpfad+"\\H_jj"+str(jj).zfill(5)+".npy")
 
+# normalizing HH
+n_HH = np.copy(HH)
+for i in range(len(HH)):
+    max_val = np.max(HH[i])
+    n_HH[i] = HH[i]/max_val
+
 # plotting
-colors = ['r', 'g', 'b', 'y', 'm', 'c', 'tab:orange', 'tab:brown'] # og convention (red=lipids, green=proteins, blue=whatever) 
+# colors = ['r', 'g', 'b', 'y', 'm', 'c', 'tab:orange', 'tab:brown'] # og convention (red=proteins, green=lipids, blue=whatever) 
 # colors = ['b', 'r', 'g', 'y', 'm', 'c', 'tab:orange', 'tab:brown'] # for 20250523_Pig01_C_ROI03_test01
 
-shift = 4
+# colors = ['y', 'r', 'y', 'y', 'b', 'c', 'g', 'tab:brown'] # og convention (red=proteins, green=lipids, blue=whatever) 
+colors = ['r', 'g', 'b']
+shift = 1.1
+
+channels = [1,6,0] # for 20260522
 
 fig, ax = plt.subplots(1)
 fig.set_size_inches(8, 5)
 
-for i in range(0,n_comp):
-    ax.plot(scale_cm1[firstchannel:lastchannel+1],HH[i]+shift*i, label=f"comp. {i}",linewidth=1, color=colors[i])
-    plt.axhline(y=0+shift*i, color='gray', linestyle=':')  # Black dotted line
+# for i in range(0,n_comp):
+for j,i in enumerate(channels):
+    # ax.plot(scale_cm1[firstchannel:lastchannel+1],HH[i]+shift*i, label=f"comp. {i}",linewidth=1, color=colors[j])
+    # plt.axhline(y=0+shift*i, color='gray', linestyle=':')  # Black dotted line
+    ax.plot(scale_cm1[firstchannel:lastchannel+1],n_HH[i]+shift*j, label=f"comp. {i}",linewidth=1, color=colors[j])
+    plt.axhline(y=0+shift*j, color='gray', linestyle=':')  # Black dotted line
+    
     
 # # plot set for 20250523_Pig01_C_ROI03_test01
 # blue_plot = HH[0]
@@ -149,14 +163,16 @@ for i in range(0,n_comp):
 plt.legend(bbox_to_anchor=(1.17, 1), loc='upper right', borderaxespad=0)
 plt.xlabel("Wavenumber [$cm^{-1}$]")
 plt.ylabel("Intensity [arb.]")
+plt.ylabel("Norm. Intensity [arb.]")
 plt.yticks([])
-plt.title(f"NMF components for {folder_name}")
+# plt.title(f"NMF components for {folder_name}")
 #plt.xlim(700, 1300)
 plt.xlim(270, 3830)
 plt.grid()
 plt.tight_layout()
 plt.show()
-plt.savefig(Bildpfad+"\\NMF_H_plot_jj"+str(jj).zfill(5)+f"_{n_comp}c_{folder_name}.png", format="png", dpi=300)
+# plt.savefig(Bildpfad+"\\NMF_H_plot_jj"+str(jj).zfill(5)+f"_{n_comp}c_{folder_name}.png", format="png", dpi=300)
+plt.savefig(Bildpfad+"\\NMF_H_plot_jj"+str(jj).zfill(5)+f"_{n_comp}c_{folder_name}_selected.png", format="png", dpi=300)
 # plt.close()
 
 # #%%

@@ -36,9 +36,9 @@ data_directory = os.path.join(project_directory, "data")
 # date = '20260107'
 # date = '20260505'
 # date = '20260513'
-date = '20260519'
+# date = '20260519'
 # date = '20260520'
-# date = '20260522'
+date = '20260522'
 
 
 # sample = 'PS3_3'
@@ -50,8 +50,8 @@ sample = 'Pig01_C'
 
 # ROI = '03'
 # ROI = '01'
-ROI = '02'
-# ROI = '04'
+# ROI = '02'
+ROI = '04'
 
 
 # test = '02'
@@ -69,8 +69,8 @@ test = '01'
 # subfolder = r"2026-05-19_17-37-21_c7" # date = '20260513' 
 # subfolder = r"2026-05-20_13-29-04_c7" # date = '20260513' 
 # subfolder = r"2026-05-22_13-57-34_c7" # date = '20260513' 
-subfolder = r'2026-05-20_13-29-04_c7' # date = '20260519'
-# subfolder = r"2026-05-26_16-55-12_c7" # date = '20260522'
+# subfolder = r'2026-05-20_13-29-04_c7' # date = '20260519'
+subfolder = r"2026-05-26_16-55-12_c7" # date = '20260522'
 
 # RAW MEASUREMENTS DIRECTORY
 folder_name =  date+'_'+sample+'_ROI'+ROI+'_test'+test
@@ -79,8 +79,8 @@ working_directory = os.path.join(project_directory, folder_name)
 Pfad = working_directory
 
 # jj = 184 # date = '20250516'
-# jj = 199 # date = '20250523' / '20250717'
-jj = 169 # date = '20260107' seven comp.
+jj = 199 # date = '20250523' / '20250717'
+# jj = 169 # date = '20260107' seven comp.
 PfadNMF = Pfad +"\\NMF"
 Bildpfad = PfadNMF + "\\"+ subfolder
 
@@ -157,23 +157,59 @@ def FrameClip (ImgIn,corner_ul,corner_lr,sx,sy): #selects a shifted ROI of an im
     res[resy1:resy2,resx1:resx2] = ImgIn[iny1:iny2,inx1:inx2]
     return res
 
-def ContrastGamma (ImgIn,min_in,max_in,min_out,max_out,gamma): #raw converter
-    #ImgIn:    input image
-    #min_in:   minimum input level (to be projected to min_out), typ: cammera dark level or a little higher
-    #max_in:   maximum input level (to be projected to min_out), typ: level of brightest region of image
-    #min_out:  typ: 0
-    #max_out:  typ: 255 or 65535
-    #gamma:    use 1 to gain a linear result, use 1/2.2 to compensate for monitor gamma of 2.2
-    return (np.clip((ImgIn.astype(np.float32)-min_in)/(max_in-min_in),0,1)**gamma)*(max_out-min_out)+min_out; # viel Zeit brauchen **gamma und np.clip !!!
-    #return        (((ImgIn.astype(np.float32)-min_in)/(max_in-min_in))    **gamma)*(max_out-min_out)+min_out; #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ohne clip
+def ContrastGamma (img,inMin,inMax,outMin,outMax,gamma):
+    """Konvertiert ein lineares RGB-Bild in ein gamma Bild (intern np.float32)
+    
+    Args:
+        #img:    input image Ein NumPy-Array mit Form z.B. (height, width) oder (height, width, 3) und Werten zwischen inMin und inMax.
+        #inMin:   minimum input level (to be projected to outMin), typ: cammera dark level or a little higher
+        #inMax:   maximum input level (to be projected to outMin), typ: level of brightest region of image
+        #outMin:  typ: 0
+        #outMax:  typ: 255 or 65535
+        #gamma:    use 1 to gain a linear result, use 1/2.2 to compensate for monitor gamma of 2.2
+        
+    Returns:
+      Ein NumPy-Array np.float32 mit Form (height, width, 3) und Werten zwischen outMin und outMax.
+    """
+    
+    if (gamma == 1):
+        return (np.clip((img.astype(np.float32)-inMin)/(inMax-inMin),0,1))*(outMax-outMin)+outMin # viel Zeit braucht np.clip !!!
+    else:
+        return (np.clip((img.astype(np.float32)-inMin)/(inMax-inMin),0,1)**gamma)*(outMax-outMin)+outMin # viel Zeit brauchen **gamma und np.clip !!!
     #https://numpy.org/devdocs/user/quickstart.html
     #https://stackoverflow.com/questions/14448763/is-there-a-convenient-way-to-apply-a-lookup-table-to-a-large-array-in-numpy
     
 ########## linear maping to sRGB maping #######################################################
+def linear2srgb(img, inMin=0.0, inMax=65535.0, outType=np.uint8):
+    """Konvertiert ein lineares RGB-Bild in sRGB. (intern np.float32)
+        inverse OETF as defined in the IEC standard is not used for EOTF
+        https://en.wikipedia.org/wiki/SRGB
+    
+    Args:
+      img: Ein NumPy-Array mit Form z.B. (height, width) oder (height, width, 3) und Werten zwischen inMin und inMax.
+      inMin=0.0: minimum input level (to be projected to outMin), typ: cammera dark level or a little higher
+      inMax=65535.0: maximum input level (to be projected to outMin), typ: level of brightest region of image
+      outType=np.uint8: np.uint8 or np.uint16
+    
+    Returns:
+      Ein NumPy-Array mit Form (height, width, 3) und Werten zwischen 0 und outMax (outType).
+    """
+    if (outType==np.uint8):
+        outMax=255
+    elif (outType==np.uint16):
+        outMax=65535
+    elif (outType==np.float32):
+        outMax=1.0
+    else:
+        return "wrong outType"
 
-def linear2srgb(lin): #vereinfachte Funktion für Skalen (in: 0 - 1)
-    img = np.where(lin <= 0.0031308, lin * 12.92, 1.055 * np.power(lin, 1.0 / 2.4) - 0.055)
-    return np.clip(img, 0.0, 1.0)
+    img = (img.astype(np.float32) - inMin) / (inMax - inMin)  # Normalisieren auf 0.0 - 1.0
+    img = np.maximum(img,0) # damit der np.power Befehl keine Fehler erzeugt und nach unten abgeschnitten wird
+    img = np.where(img <= 0.0031308, img * 12.92, 1.055 * np.power(img, 1.0 / 2.4) - 0.055) # Transfer function
+    img = np.minimum(img,1) # damit nach oben abgeschnitten wird
+    #img = np.clip(img, 0.0, 1.0) # alt funktioniert aber weder vor noch nach der Transfer function fehlerfrei
+    return (img * outMax).astype(outType)
+
 
 #%%
 # COLOR MAPS DEFINITION
@@ -382,13 +418,19 @@ sImg = np.zeros((loadshape[0], loadshape[1], 3))
 # green = AllImg_NMF[:,:,0]
 # blue = AllImg_NMF[:,:,1]
 
-# for 20250717_PS3_3_ROI03_test01
+# for 20250522_Pig01_C_ROI04_test01
 red = AllImg_NMF[:,:,1]
-green = AllImg_NMF[:,:,5]
-blue = AllImg_NMF[:,:,4]
+green = AllImg_NMF[:,:,6]
+blue = AllImg_NMF[:,:,0]
 
 # CHANGE CHANNELS HERE:
 # Take a gamma of 0.45 to correspond approximately to the sRGB gamma https://en.wikipedia.org/wiki/SRGB
+# linear to sRGB
+# sImg[:,:,0] = linear2srgb(red,0,np.max(red)) #Red
+# sImg[:,:,1] = linear2srgb(green,0,np.max(green)) #Green
+# sImg[:,:,2] = linear2srgb(blue,0,np.max(blue)) #Blue
+
+# # Gamma correction
 sImg[:,:,0] = ContrastGamma(red,0,np.max(red),outMin,outMax,gamma) #Red
 sImg[:,:,1] = ContrastGamma(green,0,np.max(green),outMin,outMax,gamma) #Green
 sImg[:,:,2] = ContrastGamma(blue,0,np.max(blue),outMin,outMax,gamma) #Blue
